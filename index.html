@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DES</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./data-loader.js" defer type="module"></script>
+    <script src="./controllers.js" defer type="module"></script>
+  </head>
+  <body>
+    <p style="color: red;">The encryption algorithm is still not fully functioning</p>
+    <div class="io">
+      <div class="input">
+        <input id="input" placeholder="enter your text here" maxlength="8"></input>
+      </div>
+      <div class="arrow-holder inactive">
+        <i class="arrow"></i>
+        <i class="arrow"></i>
+        <i class="arrow"></i>
+        </div>
+      <div class="output">
+        <input id="output" placeholder="output will be here" maxlength="0"></input>
+      </div>
+    </div>
+    <div class="encrypt-actions">
+        <input id="key" placeholder="key" maxlength="8"/>
+    </div>
+    <h1 class="shown">User Input</h1>
+    <div class="table-holder shown wide">
+        <div>
+            <h2>Ascii input</h2>
+            <div class="input-table table"></div>
+        </div>
+        <div>
+            <h2>Ascii key</h2>
+            <div class="key-table table"></div>
+        </div>
+    </div>
+    <p>
+      In the first step you take the user input, which is a key and a string. Here the String input is limited
+      to 8 characters to make it easier. The key is always limited to 8 characters. Both of the Strings are converted
+      to binary ASCII
+    </p>
+    <h1 class="deleted-bits-title">Setting up</h1>
+    <div class="table-holder deleted-bits ">
+        <div>
+            <h2>Delete every 8th bit from the key</h2>
+            <div class="table"></div>
+        </div>
+    </div>
+    <p>
+      Then we delete every 8th bit off the key, making it a 56-Bit key. Those bits can be used as
+      <a href="https://en.wikipedia.org/wiki/Parity_bit" target="_blank">parity bits</a>, but mostly are discared
+    </p>
+    
+    <div class="table-holder wide moved-bits ">
+        <div>
+            <h2>Not take the initial permutation table</h2>
+            <div class="initial-permutation-table table"></div>
+        </div>
+        <div>
+            <h2>And move the bits to their new position</h2>
+            <div class="after-first-permutation table"></div>
+        </div>
+    </div>
+    <p>
+      Next we take the initial permutation table and move the bits to their new position. This is done by taking the bit's
+      corresponding position on the permutation table and moving it to the position  by the table. The inital permutation
+      has no cryptographic significance, and was most likely done to ease the compalibily with the 70s hardware.
+    </p>
+
+    <div class="table-holder wide split-bits ">
+        <div>
+            <h2>Our left plain text is the upper half</h2>
+            <div class="left-plain-text table"></div>
+        </div>
+        <div>
+            <h2>And the right plain text is the lower half</h2>
+            <div class="right-plain-text table"></div>
+        </div>
+    </div>
+    <p>
+      Now we split the plain text into two halves. The left half is the upper half of the plain text, and the right half is the
+      lower half of the plain text. The plain text is 64 bits long, so each half is 32 bits long.
+    </p>
+    <h1 class="key-transformation-title">How a round works</h1>
+    <div class="table-holder wide key-transformation">
+      <div>
+        <h2>Take the first 28 Bits</h2>
+        <div class="left-key table"></div>
+      </div>
+      <div>
+        <h2>And the second 28 Bits</h2>
+        <div class="right-key table"></div>
+      </div>
+    </div>
+    <p>First, we need to take our initial key and we split that into two groups of 28 Bits.</p>
+    <div class="table-holder wide shift-key">
+      <div>
+        <h2>Shift the first 28 Bits</h2>
+        <div class="left-key table"></div>
+      </div>
+      <div>
+        <h2>And the second 28 Bits</h2>
+        <div class="right-key table"></div>
+      </div>
+    </div>
+    <p>
+      Then we need to shift our key by a predetermined amount, which depends on the round we are at. It's one index for rounds 1, 2, 9, 16
+      and two for all other rounds.
+    </p>
+    <div class="table-holder compression-permutation wide">
+      <div>
+        <h2>Take the compression permutation table</h2>
+        <div class="compression-permutation-table table"></div>
+      </div>
+      <div>
+        <h2>And move the bits to their new position</h2>
+        <div class="after-compression-permutation table"></div>
+      </div>
+    </div>
+    <p>
+      We take the compression permutation table, and move the bits from the index that is written on the table onto the index that it is
+      written onto. E.g. the bit on index 14 is moved onto index 1, because the tables index 1 holds the value 14. This is done to make the
+      key 48 bits long.
+    </p>
+    <div class="table-holder wide split-into-four">
+      <div>
+        <h2>Split the right plain text into 4 bit chunks</h2>
+        <div class="split-into-four-small table small"></div>
+      </div>
+      <div>
+        <h2>And turn it into 6-Bit chunks</h2>
+        <div class="expand-into-six table mid"></div>
+      </div>
+    </div>
+    <p>
+      Then we take the right plain text and part it in 4 bit chunks, and expand those chunks to 6 bits.
+      This is done by taking the last bit from the preceding table and adding it to the beginning and taking the first bit from the
+      next table and adding it to the end. With this we turn the 32 bits into a 48-Bit output, which we will need later, as we
+      apply a 48-Bit key. This example is only for the left side, but we do this to both sides
+    </p>
+    <div class="table-holder wide key-block-xor">
+      <div>
+        <h2>Take your expanded key</h2>
+        <div class="table mid"></div>
+      </div>
+      <div>
+        <h2>And apply XOR to the right side</h2>
+        <div class="table mid"></div>
+      </div>
+    </div>
+    <p>
+      We apply this step to the right time every time we are currently in an even step. Otherwise we do this to our
+      our left side.
+    </p>
+    <div class="table-holder wide sbox">
+      <div>
+        <h2>Take the first 6 bits from our XOR</h2>
+        <div class="table mid"></div>
+      </div>
+      <div>
+        <h2>And apply the first S-Box to those</h2>
+        <div class="table small"></div>
+      </div>
+    </div>
+    <p>
+      <a href="/s-boxes.html">Here are the S-Boxes listed and explained</a>
+    </p>
+    <div class="table-holder wide final-xor">
+      <div>
+        <h2>Take the left side from before</h2>
+        <div class="table"></div>
+      </div>
+      <div>
+        <h2>And XOR with our output</h2>
+        <div class="table"></div>
+      </div>
+    </div>
+    <p>
+      This process is called the Feistel scheme. We take the left side from before and XOR it with our output. And on the next round
+      we take the right side from before and XOR it with our output. This is done 16 times, which gives us an output.
+    </p>
+    <h1 class="final-concatination-title">The final permutation</h1>
+    <div class="table-holder wide final-concatination">
+      <div>
+        <h2>Take the final results as one table</h2>
+        <div class="table"></div>
+      </div>
+      <div>
+        <h2>And apply the final permutation table</h2>
+        <div class="table final-permutation-table"></div>
+      </div>
+    </div>
+    <div class="table-holder final-result">
+      <div>
+        <h2>Which leaves us with following result</h2>
+        <div class="table"></div>
+      </div>
+    </div>
+  </body>
+</html>

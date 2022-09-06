@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DES S-boxes</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./data-loader.js" defer type="module"></script>
+  </head>
+  <body>
+    <div class="table-holder shown wide">
+      <div>
+        <h2>S-Box one</h2>
+        <div class="sbox-one table large"></div>
+      </div>
+    </div>
+    <div class="table-holder shown wide">
+      <div>
+        <h2>S-Box two</h2>
+        <div class="sbox-two table large"></div>
+      </div>
+    </div>
+    <div class="table-holder shown wide">
+      <div>
+        <h2>S-Box three</h2>
+        <div class="sbox-three table large"></div>
+      </div>
+    </div>
+    <div class="table-holder shown wide">
+      <div>
+        <h2>S-Box four</h2>
+        <div class="sbox-four table large"></div>
+      </div>
+    </div>
+    <div class="table-holder shown wide">
+      <div>
+        <h2>S-Box five</h2>
+        <div class="sbox-five table large"></div>
+      </div>
+    </div>
+    <div class="table-holder shown wide">
+      <div>
+        <h2>S-Box six</h2>
+        <div class="sbox-six table large"></div>
+      </div>
+    </div>
+    <div class="table-holder shown wide">
+      <div>
+        <h2>S-Box seven</h2>
+        <div class="sbox-seven table large"></div>
+      </div>
+    </div>
+    <div class="table-holder shown wide">
+      <div>
+        <h2>S-Box eight</h2>
+        <div class="sbox-eight table large"></div>
+      </div>
+    </div>
+    <h2>About</h2>
+    <p>
+      The S-Boxes are the most important part of the DES algorithm. They are
+      4x16 tables, which are used to map 6-Bit binary numbers to 4-Bit binary
+      numbers. The first and last bit are used to determine the row, the middle
+      4 bits are used to determine the column. The value in the table is the
+      output. <br />
+      If we, for example, have the binary number 100110, we would look at the
+      first and last bit, which are 1 and 0. This would give us the row 2. The
+      middle 4 bits are 0011, which would give us the column 3. The value in the
+      table at row 2 and column 3 is then our output.
+    </p>
+  </body>
+</html>

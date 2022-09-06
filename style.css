@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+  min-height: calc(100vh - 30px);
+  margin: 0px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+h1 {
+  margin-bottom: -15px;
+}
+
+h2 {
+  text-align: center;
+}
+
+input {
+  font-family: 'Montserrat', sans-serif !important;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px;
+  padding: 5px;
+  transition: 0.25s all ease-in-out;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 20px;
+}
+
+div.table {
+  display: grid;
+  grid-template-columns: repeat(8, calc(100% / 8));
+}
+
+div.table.small {
+  grid-template-columns: repeat(4, calc(100% / 8));
+  position: relative;
+  left: 25%;
+}
+
+div.table.mid {
+  grid-template-columns: repeat(6, calc(100% / 8));
+  position: relative;
+  left: 12.5%;
+}
+
+div.table.large {
+  grid-template-columns: repeat(16, calc(100% / 8));
+  position: relative;
+  left: -50%;
+}
+
+div.table-holder {
+  margin-top: 20px !important;
+  min-width: 300px;
+  width: 25%;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+div.table-holder.wide {
+  min-width: 600px;
+  width: 50%;
+}
+
+div.table-holder > div {
+  width: 100%;
+}
+
+div.table-holder.wide > div {
+  width: 50%;
+  margin-right: 20px;
+}
+
+p {
+  min-width: 600px;
+  width: 60%;
+  text-align: justify;
+  display: block;
+  text-align-last: center;
+}
+
+div.table-holder:not(.shown) + p {
+  display: none;
+}
+
+div.table-holder:nth-last-child(2) {
+  margin-right: 0px;
+}
+
+div.table-holder:not(.shown) {
+  display: none;
+}
+
+h1:not(.shown) {
+  display: none;
+}
+
+div.table span {
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px;
+  border-radius: 10%;
+}
+
+div.table :not(.active-bit) {
+  background-color: #f2f2f2;
+}
+
+div.initial-permutation-table span {
+  background-color: white !important;
+}
+
+div.io {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+div.arrow-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 14px;
+  cursor: pointer;
+}
+
+div.arrow-holder i {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transition: 0.25s all ease-in-out;
+}
+
+div.arrow-holder.inactive {
+  opacity: 0.5;
+  cursor: auto !important;
+  pointer-events: none;
+}
