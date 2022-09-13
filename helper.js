@@ -1,5 +1,7 @@
 function beforeDisplay(holderSelector, idx) {
   let title = document.querySelector(`${holderSelector}-title`);
+  console.log(title);
+  console.log(`${holderSelector}-title`);
   let holder = document.querySelector(holderSelector);
   let output = holder.querySelectorAll('.table')[idx];
   if (title) {

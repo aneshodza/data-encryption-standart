@@ -124,7 +124,7 @@ function finalSteps(result) {
   binaryOutput.split(' ').map(function (bin) {
     binString += String.fromCharCode(parseInt(bin, 2));
   });
-
+  console.log(binString);
   document.querySelector('.io #output').value = binString;
 
   return finalResult;
